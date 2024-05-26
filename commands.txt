@@ -1,0 +1,13 @@
+cd Desktop\assignment_6
+
+remote repository url: github_url
+
+
+git init
+gid add . 
+git  commit -m "Hello World Welcome to Module 9"
+git remote add origin "github_url here""
+git push -u origin main
+
+
+
