@@ -9,5 +9,118 @@ git  commit -m "Hello World Welcome to Module 9"
 git remote add origin "github_url here""
 git push -u origin main
 
+SQL: 
+
+CREATE TABLE departments (
+    dept_no VARCHAR PRIMARY KEY,
+    dept_name VARCHAR NOT NULL
+);
+
+CREATE TABLE titles (
+    title_id VARCHAR PRIMARY KEY,
+    title VARCHAR NOT NULL
+);
+
+CREATE TABLE employees (
+    emp_no INT PRIMARY KEY,
+    emp_title_id VARCHAR NOT NULL,
+    birth_date DATE,
+    first_name VARCHAR,
+    last_name VARCHAR,
+    sex CHAR,
+    hire_date DATE,
+    FOREIGN KEY (emp_title_id) REFERENCES titles(title_id)
+);
+
+CREATE TABLE salaries (
+    emp_no INT,
+    salary INT,
+    PRIMARY KEY (emp_no),
+    FOREIGN KEY (emp_no) REFERENCES employees(emp_no)
+);
+
+CREATE TABLE dept_emp (
+    emp_no INT,
+    dept_no VARCHAR,
+    PRIMARY KEY (emp_no, dept_no),
+    FOREIGN KEY (emp_no) REFERENCES employees(emp_no),
+    FOREIGN KEY (dept_no) REFERENCES departments(dept_no)
+);
+
+CREATE TABLE dept_manager (
+    dept_no VARCHAR,
+    emp_no INT,
+    PRIMARY KEY (dept_no, emp_no),
+    FOREIGN KEY (dept_no) REFERENCES departments(dept_no),
+    FOREIGN KEY (emp_no) REFERENCES employees(emp_no)
+);
+
+-----------------
+-----------------
+1. List the employee number. last name, first name, sex, and salary.
+
+SELECT e.emp_no, e.last_name, e.first_name, e.sex, s.salary
+FROM employees e
+JOIN salaries s ON e.emp_no = s.emp_no;
+
+2. List the first name, last name, and hire date for the employees who were hired in 1986.
+
+SELECT first_name, last_name, hire_date
+FROM employees
+WHERE EXTRACT(YEAR FROM hire_date) = 1986;
+
+3. List the manager of each department along with their department number, department name, employuee number, last name, and first name.
+
+SELECT dm.dept_no, d.dept_name, dm.emp_no, e.last_name, e.first_name
+FROM dept_manager dm
+JOIN departments d ON dm.dept_no = d.dept_no
+JOIN employees e ON dm.emp_no = e.emp_no;
+
+4. List the department number for each employee along with that employee's employee number, last name, first name, and department name.
+
+SELECT de.dept_no, de.emp_no, e.last_name, e.first_name, d.dept_name
+FROM dept_emp de
+JOIN employees e ON de.emp_no = e.emp_no
+JOIN departments d ON de.dept_no = d.dept_no;
+
+5. List first name, last name, and sex of each employee whose first name is Hercules and whose last name begins with the letter B.
+
+SELECT first_name, last_name, sex
+FROM employees
+WHERE first_name = 'Hercules' AND last_name LIKE 'B%';
+
+6. List each employee in the Sales department, including their employee number, last_name, and first_name. 
+
+SELECT e.emp_no, e.last_name, e.first_name
+FROM employees e
+JOIN dept_emp de ON e.emp_no = de.emp_no
+JOIN departments d ON de.dept_no = d.dept_no
+WHERE d.dept_name = 'Sales';
+
+7. List each employee in the Sales and Development departments, including their employee number, last name, first name, annd department name.
+
+SELECT e.emp_no, e.last_name, e.first_name, d.dept_name
+FROM employees e
+JOIN dept_emp de ON e.emp_no = de.emp_no
+JOIN departments d ON de.dept_no = d.dept_no
+WHERE d.dept_name IN ('Sales', 'Development');
+
+8. List the frequency counts, in descending order, of all the employees last name. 
+
+SELECT last_name, COUNT(*) AS count
+FROM employees
+GROUP BY last_name
+ORDER BY count DESC;
 
 
+Analysis:
+
+Primary Key:    A primary Key is a field or set of fields that uniquely indentifies each row in a table. 
+                No, two rows in a table can have the same value for the primary key. It is essential for 
+                ensuring data integriry and is also used to establish relationships between tables.
+        ** In the 'departments' table  ('dept_no') serves as the primary key because each department number uniquely identifies a department
+
+Foreign Key:    A Foreign Key is a field or set of fields in one table that uniquely identifies a row of another table or the same table. 
+                The main purpose of a foreign key is to enfore referential integrirt, ensuring relationships between tables are consistent and that there is no orphan data. 
+        ** In the 'employees' table, 'emp_title_id' is a foreign key that references 'title_id' from the "titles" table.  
+           This ensures that every employee has a valid title defined from the 'titles' table. 
