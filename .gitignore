@@ -5,7 +5,7 @@ __pycache__/
 
 # Mines
 python_fun.py
-
+commands.txt
 # C extensions
 *.so
 

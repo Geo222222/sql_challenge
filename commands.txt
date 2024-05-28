@@ -124,3 +124,54 @@ Foreign Key:    A Foreign Key is a field or set of fields in one table that uniq
                 The main purpose of a foreign key is to enfore referential integrirt, ensuring relationships between tables are consistent and that there is no orphan data. 
         ** In the 'employees' table, 'emp_title_id' is a foreign key that references 'title_id' from the "titles" table.  
            This ensures that every employee has a valid title defined from the 'titles' table. 
+
+Relationships:
+        Databases in SQL often contain multiple tables that are interrelated through foreign keys, forming relationships that can be one to one , one to many or many to many 
+            One to One is when each row in tone database table is linked to 1(and only 1) row in another table. For example, if each employee had exactly one unique login credeital stored in a seperate table, 
+            the relationship between the employees and credentials would be one to one. 
+
+            One to many if when a row in one table can be linked to many rows in another table. For example, the 'departments' to 'dept_emp' relatinship is one to many since each department can have many employees.
+
+            Many to many is when many rows in one table can be linked to many rows in another table. This is often implemented using a join table
+            example: 'dept_emp" which joings 'employees' and 'departments'
+
+
+
+CREATE TABLE departments (
+    dept_no VARCHAR PRIMARY KEY,
+    dept_name VARCHAR NOT NULL
+)
+**  department number is the primary key. It uniquely identifies
+    each department
+    department name is market as NOT NULL, ensuring that every 
+    department must have a name.
+
+CREATE TABLE titles (
+    title_id VARCHAR PRIMARY KEY,
+    title VARCHAR NOT NULL,
+)
+**  Each title ID is unique and each title must have a name.
+
+CREATE TABLE employees (
+    emp_no INT PRIMARY KEY,
+    emp_title_id VARCHAR NOT NULL,
+    birth_date DATE,
+    first_name VAR CHAR,
+    last_name VARCHAR,
+    sex CHAR,
+    hire_date DATE,
+    FOREIGN KEY (emp_title_id) REFERENCES titles(title_id)
+)
+**  emp_no is the primary key because it uniquely identifies each employee.
+    emp_title_id is a foreign key that ensures all employees have a valid title from the 'titles' table 
+
+CREATE TABLE salaries (
+    emp_no INT,
+    salary INT,
+    PRIMARY KEY (emp_no)
+    FOREIGN KEY (emp_no) REFERENECS employee(emp_no)
+)
+
+
+
+
