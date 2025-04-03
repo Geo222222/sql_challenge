@@ -1,52 +1,67 @@
-# sql_challenge
-Module 9 Challenge filesLinks to an external site. - Data Analytics
+# 🧾 SQL Challenge – Employee Database Analysis
 
-Background
-It’s been two weeks since you were hired as a new data engineer at Pewlett Hackard (a fictional company). Your first major task is to do a research project about people whom the company employed during the 1980s and 1990s. All that remains of the employee database from that period are six CSV files.
+## 🧠 Overview
 
-For this project, you’ll design the tables to hold the data from the CSV files, import the CSV files into a SQL database, and then answer questions about the data. That is, you’ll perform data modeling, data engineering, and data analysis, respectively.
+This project explores an employee database from a fictional company, Pewlett Hackard. Using PostgreSQL, we perform **data modeling**, **data engineering**, and **data analysis** to understand employee records from the 1980s and 1990s. This challenge demonstrates your SQL schema design, data importation, and complex querying skills.
 
-Before You Begin
-Create a new repository for this project called sql-challenge. Do not add this assignment to an existing repository.
+---
 
-Clone the new repository to your computer.
+## 🔧 Tools & Technologies
 
-Inside your local Git repository, create a directory for this Challenge. Use a folder name that corresponds to the Challenge, such as EmployeeSQL.
+- PostgreSQL
+- SQLAlchemy
+- Pandas
+- pgAdmin
+- Jupyter Notebook
 
-Note that you’ll add your files to this folder and push the changes to GitHub.
+---
+
+## 📂 Project Structure
 
 
-Instructions
-This Challenge is divided into three parts: data modeling, data engineering, and data analysis.
+---
 
-Data Modeling
-Inspect the CSV files, and then sketch an Entity Relationship Diagram of the tables. To create the sketch, feel free to use a tool like QuickDBDLinks to an external site..
+## 🧱 Part 1: Data Modeling
 
-Data Engineering
-Use the provided information to create a table schema for each of the six CSV files. Be sure to do the following:
+- Reviewed 6 CSV files
+- Designed an Entity Relationship Diagram (ERD) outlining table relationships
+- Defined primary and foreign key constraints
 
-Remember to specify the data types, primary keys, foreign keys, and other constraints.
+---
 
-For the primary keys, verify that the column is unique. Otherwise, create a composite keyLinks to an external site., which takes two primary keys to uniquely identify a row.
+## 🗃️ Part 2: Data Engineering
 
-Be sure to create the tables in the correct order to handle the foreign keys.
+- Created SQL schema with properly ordered table creation scripts
+- Defined data types and constraints
+- Imported CSVs into PostgreSQL using `COPY` commands or SQLAlchemy
 
-Import each CSV file into its corresponding SQL table.
+---
 
-HINT
-Data Analysis
-List the employee number, last name, first name, sex, and salary of each employee.
+## 🔍 Part 3: Data Analysis
 
-List the first name, last name, and hire date for the employees who were hired in 1986.
+### Example Queries:
+- Employees hired in 1986
+- Managers and their departments
+- Employees in Sales and Development
+- Gender and salary breakdowns
+- Frequency of last names
 
-List the manager of each department along with their department number, department name, employee number, last name, and first name.
+Results were retrieved using raw SQL and Pandas DataFrames for additional exploration in Python.
 
-List the department number for each employee along with that employee’s employee number, last name, first name, and department name.
+---
 
-List first name, last name, and sex of each employee whose first name is Hercules and whose last name begins with the letter B.
+## 📊 Insights
 
-List each employee in the Sales department, including their employee number, last name, and first name.
+- Identified hiring patterns
+- Mapped department headcounts
+- Analyzed salary distributions by gender and department
 
-List each employee in the Sales and Development departments, including their employee number, last name, first name, and department name.
+---
 
-List the frequency counts, in descending order, of all the employee last names (that is, how many employees share each last name).
+## 📌 Future Improvements
+
+- Automate schema creation and data ingestion via Python scripts
+- Add stored procedures or views for frequent queries
+- Visualize results in a dashboard (e.g., Tableau or Power BI)
+  
+
